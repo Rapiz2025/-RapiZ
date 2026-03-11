@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RAPIZ Facturación</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="app-header">
+    <div>
+      <h1>RAPIZ, S.R.L. - Sistema de Facturación</h1>
+      <p class="subtitle">Más que velocidad</p>
+    </div>
+    <div class="header-actions">
+      <button id="btnNueva" class="btn secondary">Nueva factura</button>
+      <button id="btnGuardar" class="btn primary">Guardar factura</button>
+      <button id="btnImprimir" class="btn">Imprimir</button>
+      <button id="btnPDF" class="btn success">Descargar PDF</button>
+    </div>
+  </header>
+
+  <main class="layout">
+    <section class="panel form-panel">
+      <h2>Datos de factura</h2>
+
+      <div class="grid-2">
+        <label>No. Factura
+          <input id="invoiceNumber" type="text" readonly />
+        </label>
+        <label>Comprobante Fiscal (NCF)
+          <input id="fiscalNumber" type="text" placeholder="B0100000001" />
+        </label>
+        <label>Fecha
+          <input id="invoiceDate" type="date" />
+        </label>
+        <label>Vencimiento
+          <input id="dueDate" type="date" />
+        </label>
+      </div>
+
+      <h3>Cliente</h3>
+      <div class="grid-2">
+        <label>Nombre / Razón social
+          <input id="clientName" type="text" placeholder="Nombre del cliente" />
+        </label>
+        <label>RNC / Cédula
+          <input id="clientTaxId" type="text" placeholder="000-0000000-0" />
+        </label>
+        <label>Teléfono
+          <input id="clientPhone" type="text" placeholder="(809) 000-0000" />
+        </label>
+        <label>Correo
+          <input id="clientEmail" type="email" placeholder="cliente@email.com" />
+        </label>
+      </div>
+      <label>Dirección
+        <input id="clientAddress" type="text" placeholder="Dirección del cliente" />
+      </label>
+
+      <h3>Conceptos de facturación</h3>
+      <div class="table-wrap">
+        <table id="itemsTable">
+          <thead>
+            <tr>
+              <th>Descripción</th>
+              <th>Cantidad</th>
+              <th>Precio</th>
+              <th>ITBIS %</th>
+              <th>Total</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="itemsBody"></tbody>
+        </table>
+      </div>
+      <button id="btnAddRow" class="btn secondary small">+ Agregar línea</button>
+
+      <div class="totals grid-2">
+        <label>Descuento (DOP)
+          <input id="discount" type="number" min="0" value="0" step="0.01" />
+        </label>
+        <label>Impuesto general (%)
+          <input id="taxRate" type="number" min="0" value="18" step="0.01" />
+        </label>
+        <label>Subtotal
+          <input id="subtotal" type="text" readonly />
+        </label>
+        <label>Impuesto
+          <input id="taxTotal" type="text" readonly />
+        </label>
+        <label class="full-row">Total
+          <input id="grandTotal" type="text" readonly class="grand" />
+        </label>
+      </div>
+
+      <label>Notas
+        <textarea id="notes" rows="3" placeholder="Notas internas o comentarios para el cliente"></textarea>
+      </label>
+    </section>
+
+    <section class="panel preview-panel">
+      <h2>Vista previa en tiempo real</h2>
+      <article id="invoicePreview" class="invoice-printable"></article>
+    </section>
+
+    <section class="panel history-panel">
+      <h2>Historial local</h2>
+      <input id="searchHistory" type="text" placeholder="Buscar por cliente, NCF o no. factura" />
+      <div id="historyList" class="history-list"></div>
+    </section>
+
+    <section class="panel config-panel">
+      <h2>Configuración editable</h2>
+      <div class="grid-2">
+        <label>Empresa
+          <input id="cfgCompany" type="text" />
+        </label>
+        <label>RNC
+          <input id="cfgRnc" type="text" />
+        </label>
+        <label>Dirección
+          <input id="cfgAddress" type="text" />
+        </label>
+        <label>Teléfonos
+          <input id="cfgPhones" type="text" />
+        </label>
+        <label>Correo
+          <input id="cfgEmail" type="text" />
+        </label>
+        <label>Eslogan
+          <input id="cfgSlogan" type="text" />
+        </label>
+      </div>
+      <button id="btnSaveConfig" class="btn success">Guardar configuración</button>
+    </section>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
